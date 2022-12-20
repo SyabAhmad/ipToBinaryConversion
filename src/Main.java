@@ -3,9 +3,11 @@ import java.util.Scanner;
 class MainControlPanel{
     char classForIP;
     String subnitMaskValue;
-    int[] IPAddress;
+    int temp;
+    int[] IPAddress = new int[4];
     int[] defaultValues = {128, 64, 32, 16, 8, 4, 2, 1};
     int[] tempIpAddress;
+    int[] binaryConvertedIP = new int[8];
     Scanner reader= new Scanner(System.in);
 }
 
@@ -17,20 +19,17 @@ class AllFuncionsAreHere extends MainControlPanel{
         {
             IPAddress[i] = reader.nextInt();
         }
-
         /// just to store in case of use
-
-
-        for (int j = 0;j<4;j++)
-        {
-            for (int k=0;k<4;k++)
-            {
-                tempIpAddress[j] = IPAddress[j];
-            }
-        }
+//        for (int j = 0;j<4;j++)
+//        {
+//            for (int k=0;k<4;k++)
+//            {
+//                tempIpAddress[j] = IPAddress[j];
+//            }
+//        }
     }
 
-    public void ClassFinder(){
+    public char ClassFinder(){
         if (IPAddress[0] > 1 && IPAddress[0] < 126)
         {
             classForIP = 'A';
@@ -43,9 +42,10 @@ class AllFuncionsAreHere extends MainControlPanel{
         }else if ((IPAddress[0] > 240 && IPAddress[0] < 254)) {
             classForIP = 'E';
         }
+        return classForIP;
     }
 
-    public void SubnitMaskFinder(){
+    public String SubnitMaskFinder(){
         if (classForIP == 'A')
         {
             subnitMaskValue= "255.0.0.0";
@@ -58,7 +58,49 @@ class AllFuncionsAreHere extends MainControlPanel{
         } else if (classForIP == 'E') {
             subnitMaskValue= "Expiremental";
         }
+        return subnitMaskValue;
     }
+
+    public void ConversionTOBinary(){
+        System.out.println("Conversion Started...");
+        for(int i=0; i<8; i++)
+        {
+            if (IPAddress[0] > defaultValues[i])
+            {
+                temp = IPAddress[0]-defaultValues[i];
+                binaryConvertedIP[0] = 1;
+                if (temp > IPAddress[1])
+                {
+                    temp = IPAddress[1]-defaultValues[i];
+                    binaryConvertedIP[1] = 1;
+                    if (temp > IPAddress[2])
+                    {
+                        temp = IPAddress[2]-defaultValues[i];
+                        binaryConvertedIP[2] = 1;
+                        if (temp > IPAddress[3])
+                        {
+                            temp = IPAddress[3]-defaultValues[i];
+                            binaryConvertedIP[3] = 1;
+                        }
+                        else{
+                            binaryConvertedIP[1] = 0;
+                        }
+                    }
+                    else{
+                        binaryConvertedIP[1] = 0;
+                    }
+                }
+                else {
+                    binaryConvertedIP[1] = 0;
+                }
+            } else{
+                binaryConvertedIP[1] = 0;
+            }
+
+        }
+    }
+
+
 }
 
 
@@ -71,5 +113,7 @@ public class Main {
         toCallMethods.getData();
         toCallMethods.ClassFinder();
         toCallMethods.SubnitMaskFinder();
+        System.out.println(toCallMethods.ClassFinder());
+        System.out.println(toCallMethods.SubnitMaskFinder());
     }
 }
