@@ -1,15 +1,15 @@
-import java.util.ArrayList;
 import java.util.Scanner;
 
 class MainControlPanel{
     char classForIP;
+    String subnitMaskValue;
     int[] IPAddress;
     int[] defaultValues = {128, 64, 32, 16, 8, 4, 2, 1};
     int[] tempIpAddress;
     Scanner reader= new Scanner(System.in);
 }
 
-class Calculation extends MainControlPanel{
+class AllFuncionsAreHere extends MainControlPanel{
     public void getData(){
         System.out.println("To Convert Ip to Binary...");
         System.out.println("Enter You IP Address (one by one): ");
@@ -30,7 +30,7 @@ class Calculation extends MainControlPanel{
         }
     }
 
-    public void calculation(){
+    public void ClassFinder(){
         if (IPAddress[0] > 1 && IPAddress[0] < 126)
         {
             classForIP = 'A';
@@ -44,6 +44,21 @@ class Calculation extends MainControlPanel{
             classForIP = 'E';
         }
     }
+
+    public void SubnitMaskFinder(){
+        if (classForIP == 'A')
+        {
+            subnitMaskValue= "255.0.0.0";
+        } else if (classForIP == 'B') {
+            subnitMaskValue= "255.255.0.0";
+        } else if (classForIP == 'C') {
+            subnitMaskValue= "255.255.255.0";
+        } else if (classForIP == 'D') {
+            subnitMaskValue= "Reserved For Multicasting";
+        } else if (classForIP == 'E') {
+            subnitMaskValue= "Expiremental";
+        }
+    }
 }
 
 
@@ -52,5 +67,9 @@ public class Main {
         System.out.println("Conversion of IP address to binary Form");
         System.out.println("Also with Class and Range of IP");
 
+        AllFuncionsAreHere toCallMethods = new AllFuncionsAreHere();
+        toCallMethods.getData();
+        toCallMethods.ClassFinder();
+        toCallMethods.SubnitMaskFinder();
     }
 }
