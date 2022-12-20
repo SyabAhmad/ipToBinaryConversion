@@ -1,3 +1,5 @@
+import org.w3c.dom.ls.LSOutput;
+
 import java.util.Scanner;
 
 class MainControlPanel{
@@ -7,7 +9,7 @@ class MainControlPanel{
     int[] IPAddress = new int[4];
     int[] defaultValues = {128, 64, 32, 16, 8, 4, 2, 1};
     int[] tempIpAddress;
-    int[] binaryConvertedIP = new int[8];
+    int[] binaryConvertedIP = new int[7];
     Scanner reader= new Scanner(System.in);
 }
 
@@ -63,40 +65,101 @@ class AllFuncionsAreHere extends MainControlPanel{
 
     public void ConversionTOBinary(){
         System.out.println("Conversion Started...");
-        for(int i=0; i<8; i++)
+
+        for (int i = 0; i<8;i++)
         {
-            if (IPAddress[0] > defaultValues[i])
+            if (defaultValues[0] < IPAddress[0])
             {
-                temp = IPAddress[0]-defaultValues[i];
+                temp = defaultValues[0]-IPAddress[0];
                 binaryConvertedIP[0] = 1;
-                if (temp > IPAddress[1])
+
+                if (temp < defaultValues[1])
                 {
-                    temp = IPAddress[1]-defaultValues[i];
+                    temp = defaultValues[1]-temp;
                     binaryConvertedIP[1] = 1;
-                    if (temp > IPAddress[2])
-                    {
-                        temp = IPAddress[2]-defaultValues[i];
-                        binaryConvertedIP[2] = 1;
-                        if (temp > IPAddress[3])
-                        {
-                            temp = IPAddress[3]-defaultValues[i];
-                            binaryConvertedIP[3] = 1;
-                        }
-                        else{
-                            binaryConvertedIP[1] = 0;
-                        }
-                    }
-                    else{
-                        binaryConvertedIP[1] = 0;
-                    }
                 }
                 else {
                     binaryConvertedIP[1] = 0;
                 }
-            } else{
-                binaryConvertedIP[1] = 0;
+                if (temp < IPAddress[2])
+                {
+                    temp = defaultValues[1]-temp;
+                    binaryConvertedIP[2] = 1;
+                }
+                else {
+                    binaryConvertedIP[2] = 0;
+                }
+                if (temp < defaultValues[1])
+                {
+                    temp = defaultValues[1]-temp;
+                    binaryConvertedIP[3] = 1;
+                }
+                else {
+                    binaryConvertedIP[3] = 0;
+                }
+                if (temp < defaultValues[1])
+                {
+                    temp = defaultValues[1]-temp;
+                    binaryConvertedIP[4] = 1;
+                }
+                else {
+                    binaryConvertedIP[4] = 0;
+                }
+
+                if (temp < defaultValues[1])
+                {
+                    temp = defaultValues[1]-temp;
+                    binaryConvertedIP[5] = 1;
+                }
+                else {
+                    binaryConvertedIP[5] = 0;
+                }
+
+                if (temp < defaultValues[1])
+                {
+                    temp = defaultValues[1]-temp;
+                    binaryConvertedIP[6] = 1;
+                }
+                else {
+                    binaryConvertedIP[6] = 0;
+                }
+
+
+                if (temp < IPAddress[7])
+                {
+                    temp = defaultValues[1]-temp;
+                    binaryConvertedIP[7] = 1;
+                }
+                else {
+                    binaryConvertedIP[7] = 0;
+                }
+                if (temp < IPAddress[7])
+                {
+                    temp = defaultValues[1]-temp;
+                    binaryConvertedIP[7] = 1;
+                }
+                else {
+                    binaryConvertedIP[7] = 0;
+                }
+
+            } else {
+                if (defaultValues[1] < IPAddress[0]) {
+
+                }
             }
 
+        }
+
+        for(int i=0; i<8; i++)
+        {
+//
+
+        }
+
+        /// Display  converted array
+        for (int i = 0; i <8; i++)
+        {
+            System.out.print(binaryConvertedIP[i] + " : ");
         }
     }
 
@@ -115,5 +178,43 @@ public class Main {
         toCallMethods.SubnitMaskFinder();
         System.out.println(toCallMethods.ClassFinder());
         System.out.println(toCallMethods.SubnitMaskFinder());
+        toCallMethods.ConversionTOBinary();
     }
 }
+
+
+
+
+
+
+//if (IPAddress[0] > defaultValues[i])
+//            {
+//                temp = IPAddress[0]-defaultValues[i];
+//                binaryConvertedIP[0] = 1;
+//                if (temp > IPAddress[1])
+//                {
+//                    temp = IPAddress[1]-defaultValues[i];
+//                    binaryConvertedIP[1] = 1;
+//                    if (temp > IPAddress[2])
+//                    {
+//                        temp = IPAddress[2]-defaultValues[i];
+//                        binaryConvertedIP[2] = 1;
+//                        if (temp > IPAddress[3])
+//                        {
+//                            temp = IPAddress[3]-defaultValues[i];
+//                            binaryConvertedIP[3] = 1;
+//                        }
+//                        else{
+//                            binaryConvertedIP[1] = 0;
+//                        }
+//                    }
+//                    else{
+//                        binaryConvertedIP[1] = 0;
+//                    }
+//                }
+//                else {
+//                    binaryConvertedIP[1] = 0;
+//                }
+//            } else{
+//                binaryConvertedIP[1] = 0;
+//            }
